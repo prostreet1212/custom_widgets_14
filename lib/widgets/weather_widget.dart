@@ -5,7 +5,7 @@ class WeatherWidget extends CustomPainter {
   void paint(Canvas canvas, Size size) {
      var paint3 = Paint()
     ..color = Color.fromARGB(255, 250, 220, 92);
-    canvas.drawCircle(Offset(0.0, 0.0), 50, paint3);
+    canvas.drawCircle(Offset(0.0, 0.0), 60, paint3);
     Paint paint = Paint()..color = Colors.blue;
     Paint paint2 = Paint()..color = Colors.green;
 
@@ -23,11 +23,13 @@ class WeatherWidget extends CustomPainter {
     canvas.drawRRect(rect, paint2);
 
     canvas.drawCircle(Offset(5, 100.0), 30, paint);
+
     canvas.drawCircle(
       Offset(60, 90.0),
       40.0,
       paint,
     );
+
      canvas.drawCircle(
       Offset(110, 97.0),
       33.0,
