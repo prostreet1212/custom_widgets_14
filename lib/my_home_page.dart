@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               });
             },
             child: AnimatedBuilder(
-              animation: Listenable.merge([animation,animation1]),
+              animation: Listenable.merge([animation, animation1]),
               child: SizedBox(
                 width: 150,
                 height: 150,
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               builder: (context, child) {
                 return Transform.translate(
                   offset: Offset(0.0, animation1.value),
-                  transformHitTests: true,
+                  //transformHitTests: true,
                   child: Transform.scale(
                     transformHitTests: true,
                     scale: animation.value,
@@ -71,14 +71,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         painter: WeatherWidget(opacity: widget.sliderValue),
                       ),
                     ),
-                ),
+                  ),
                 );
               },
             ),
           ),
           //--------
           SizedBox(
-            height: 30,
+            height: 200,
           ),
           Slider(
               min: 0,
@@ -90,7 +90,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 setState(() {
                   widget.sliderValue = v;
                 });
-              })
+              }),
+          Text(
+            'Испортить погоду',
+            style: TextStyle(fontSize: 24),
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
