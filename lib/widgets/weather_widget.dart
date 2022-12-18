@@ -1,9 +1,12 @@
+
+
 import 'package:flutter/material.dart';
 
 class WeatherWidget extends CustomPainter {
   double opacity;
+  Animation animation;
 
-  WeatherWidget({required this.opacity});
+  WeatherWidget({required this.opacity,required this.animation});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -61,7 +64,19 @@ class WeatherWidget extends CustomPainter {
       ..lineTo(35 + x, 100 + y)
       ..close();
     canvas.drawPath(path3, paint);
+
+    //текст
+    final textSpan = TextSpan(
+      text: 'Облачно,\n12 градусов',
+      style: TextStyle(color: Colors.black.withOpacity(animation.value),fontSize: 30),
+    );
+    TextPainter tp = new TextPainter(text: textSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+    tp.layout();
+    tp.paint(canvas, new Offset(-65.0+x, 65.0+y));
   }
+
+
+  
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
