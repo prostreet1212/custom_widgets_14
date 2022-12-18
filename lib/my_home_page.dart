@@ -25,13 +25,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     duration: const Duration(seconds: 2),
     vsync: this,
   );
-  late final animation=Tween(begin: 0,end: 2*pi).animate(controller);
-
+  late final animation = Tween(begin: 0.5, end: 1.5).animate(controller);
+  late final animation1 = Tween(begin: 0.5, end: 100.0).animate(controller);
 
   @override
   Widget build(BuildContext context) {
-
-    double transform = 50;
+    double transform = 0;
 
     return Scaffold(
       appBar: AppBar(
@@ -39,10 +38,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       ),
       body: Column(
         children: [
-          AnimatedBuilder(
-            animation: animation,
-           child: Align(
-              alignment: Alignment.topRight,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                if (controller.isCompleted) {
+                  controller.reverse();
+                } else {
+                  controller.forward();
+                }
+              });
+            },
+            child: AnimatedBuilder(
+              animation: Listenable.merge([animation,animation1]),
               child: SizedBox(
                 width: 150,
                 height: 150,
@@ -50,23 +57,26 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   painter: WeatherWidget(opacity: widget.sliderValue),
                 ),
               ),
-            ),
-            builder: (context, child) {
-              return Transform.rotate(
-                angle: animation.value.toDouble(),
-                child:Align(
-                  alignment: Alignment.topRight,
-                  child: SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: CustomPaint(
-                      painter: WeatherWidget(opacity: widget.sliderValue),
+              builder: (context, child) {
+                return Transform.translate(
+                  offset: Offset(0.0, animation1.value),
+                  transformHitTests: true,
+                  child: Transform.scale(
+                    transformHitTests: true,
+                    scale: animation.value,
+                    child: SizedBox(
+                      width: 150,
+                      height: 150,
+                      child: CustomPaint(
+                        painter: WeatherWidget(opacity: widget.sliderValue),
+                      ),
                     ),
-                  ),
                 ),
-              );
-            },
+                );
+              },
+            ),
           ),
+          //--------
           SizedBox(
             height: 30,
           ),
@@ -84,9 +94,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           setState(() {
-            controller.forward();
+            controller.reverse();
+            //controller.repeat();
           });
         },
       ),
