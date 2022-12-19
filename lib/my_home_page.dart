@@ -1,10 +1,13 @@
+import 'package:custom_widgets_14/models/menu_color.dart';
+import 'package:custom_widgets_14/themes/app_theme.dart';
+import 'package:custom_widgets_14/utils/utils.dart';
 import 'package:custom_widgets_14/widgets/inner_shadow_widget.dart';
 import 'package:custom_widgets_14/widgets/weather_widget.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
-  double sliderValue = 0;
+   double sliderValue = 0;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -24,6 +27,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Custom Widgets'),
+        actions: [
+          PopupMenuButton<MenuColor>(
+            icon: Icon(Icons.square,color: menuColorList[0].color,),
+              itemBuilder: (context)=>//<PopupMenuEntry<MenuColor>>[
+            menuColorList.map((e) => PopupMenuItem<MenuColor>(child: Text('aa')));
+            //PopupMenuItem<MenuColor>(child: ListTile())
+    //]
+
+          )
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,14 +86,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       widget.sliderValue = v;
                     });
                   }),
-              const InnerShadow(
-                  blur: 10,
-                  color: Color(0xFFFFE555),
-                  offset: Offset(5, 5),
-                  child: Text(
-                    'Испортить погоду',
-                    style: TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
-                  )),
+              AppTheme(
+                  appColor: Colors.lightBlueAccent,
+                  child: Builder(builder: (innerContext){
+                    return InnerShadow(
+                        blur: 10,
+                        color: AppTheme.of(innerContext),
+                        offset: Offset(5, 5),
+                        child: Text(
+                          'Испортить погоду',
+                          style: TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
+                        ));
+                  },)) ,
               const SizedBox(
                 height: 20,
                 width: 100,
