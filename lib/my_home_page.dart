@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:custom_widgets_14/widgets/inner_shadow_widget.dart';
-import 'package:custom_widgets_14/widgets/text_widget.dart';
 import 'package:custom_widgets_14/widgets/weather_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -24,10 +21,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('Custom Widgets'),
+        title: const Text('Custom Widgets'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,19 +46,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       }
                     });
                   },
-                    child: SizedBox(
-                      height: 150+animation1.value,
-                      width: 150,
-                      child: CustomPaint(
-                        painter: WeatherWidget(
-                            opacity: widget.sliderValue, animation: animation2),
-                      ),
+                  child: SizedBox(
+                    height: 150 + animation1.value,
+                    width: 150,
+                    child: CustomPaint(
+                      painter: WeatherWidget(
+                          opacity: widget.sliderValue, animation: animation2),
                     ),
+                  ),
                 ),
               );
             },
           ),
-
 
           //--------
           Column(
@@ -78,15 +73,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       widget.sliderValue = v;
                     });
                   }),
-              InnerShadow(
+              const InnerShadow(
                   blur: 10,
-                  color: const Color(0xFFFFE555),
-                  offset: const Offset(5, 5),
+                  color: Color(0xFFFFE555),
+                  offset: Offset(5, 5),
                   child: Text(
-                'Испортить погоду',
-                style: TextStyle(fontSize: 44,fontWeight:FontWeight.bold ),
-              )),
-            SizedBox(
+                    'Испортить погоду',
+                    style: TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
+                  )),
+              const SizedBox(
                 height: 20,
                 width: 100,
               ),

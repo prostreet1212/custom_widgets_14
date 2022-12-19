@@ -14,10 +14,7 @@ class WeatherWidget extends CustomPainter {
       ..color = Colors.grey.withOpacity(getCloudOpacity(opacity));
     var paint3 = Paint()
       ..color =
-          Color.fromARGB(255, 250, 220, 92).withOpacity(getSunOpacity(opacity));
-    var paint4 = Paint()
-      ..color = Colors.green.withOpacity(getCloudOpacity(opacity))
-      ..strokeWidth = 4;
+          const Color.fromARGB(255, 250, 220, 92).withOpacity(getSunOpacity(opacity));
 
     double x = size.width / 2;
     double y = size.height / 2;
@@ -27,13 +24,15 @@ class WeatherWidget extends CustomPainter {
     //Облачко
     RRect rect = RRect.fromRectAndRadius(
         Rect.fromPoints(Offset(-55 + x, 40.0 + y), Offset(55 + x, 70 + y)),
-        Radius.circular(0));
+        const Radius.circular(0));
     Path cloudPath = Path();
     cloudPath.addRRect(rect);
     cloudPath.addOval(
         Rect.fromCircle(center: Offset(-55 + x, 40.0 + y), radius: 30));
-    cloudPath.addOval(Rect.fromCircle(center: Offset(0 + x, 30.0 + y), radius: 40));
-    cloudPath.addOval(Rect.fromCircle(center: Offset(50 + x, 37 + y), radius: 33));
+    cloudPath
+        .addOval(Rect.fromCircle(center: Offset(0 + x, 30.0 + y), radius: 40));
+    cloudPath
+        .addOval(Rect.fromCircle(center: Offset(50 + x, 37 + y), radius: 33));
     canvas.drawPath(cloudPath, paint2);
 
     //Капли
@@ -67,12 +66,12 @@ class WeatherWidget extends CustomPainter {
       style: TextStyle(
           color: Colors.black.withOpacity(animation.value), fontSize: 30),
     );
-    TextPainter tp = new TextPainter(
+    TextPainter tp = TextPainter(
         text: textSpan,
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr);
     tp.layout();
-    tp.paint(canvas, new Offset(-65.0 + x, 65.0 + y));
+    tp.paint(canvas, Offset(-65.0 + x, 65.0 + y));
   }
 
   @override
@@ -86,15 +85,10 @@ class WeatherWidget extends CustomPainter {
   }
 
   double getCloudOpacity(double value) {
-    /*  if(value>0.7){
-      return 1;
-    }
-    return (10/7*value);*/
     if (value > 0.5) {
       return 1;
     }
     return value * 2;
-    1 - (0.1 * 2);
   }
 
   double getSunOpacity(double value) {
