@@ -1,12 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 
 class WeatherWidget extends CustomPainter {
   double opacity;
   Animation animation;
 
-  WeatherWidget({required this.opacity,required this.animation});
+  WeatherWidget({required this.opacity, required this.animation});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -17,9 +15,12 @@ class WeatherWidget extends CustomPainter {
     var paint3 = Paint()
       ..color =
           Color.fromARGB(255, 250, 220, 92).withOpacity(getSunOpacity(opacity));
+    var paint4 = Paint()
+      ..color = Colors.green.withOpacity(getCloudOpacity(opacity))
+      ..strokeWidth = 4;
 
-    double x = 75;
-    double y = 75;
+    double x = size.width / 2;
+    double y = size.height / 2;
 
     //Солнце
     canvas.drawCircle(Offset(0.0 + x, 0 + y), 60, paint3);
@@ -27,56 +28,52 @@ class WeatherWidget extends CustomPainter {
     RRect rect = RRect.fromRectAndRadius(
         Rect.fromPoints(Offset(-55 + x, 40.0 + y), Offset(55 + x, 70 + y)),
         Radius.circular(0));
-    canvas.drawRRect(rect, paint2);
-    canvas.drawCircle(Offset(-55 + x, 40.0 + y), 30, paint2);
-    canvas.drawCircle(
-      Offset(0 + x, 30.0 + y),
-      40.0,
-      paint2,
-    );
-    canvas.drawCircle(
-      Offset(50 + x, 37 + y),
-      33.0,
-      paint2,
-    );
+    Path cloudPath = Path();
+    cloudPath.addRRect(rect);
+    cloudPath.addOval(
+        Rect.fromCircle(center: Offset(-55 + x, 40.0 + y), radius: 30));
+    cloudPath.addOval(Rect.fromCircle(center: Offset(0 + x, 30.0 + y), radius: 40));
+    cloudPath.addOval(Rect.fromCircle(center: Offset(50 + x, 37 + y), radius: 33));
+    canvas.drawPath(cloudPath, paint2);
 
     //Капли
-    Path path = Path()
+    Path dropPath = Path()
       ..moveTo(-55 + x, 80 + y)
       ..lineTo(-49 + x, 82 + y)
       ..lineTo(-59 + x, 102 + y)
       ..lineTo(-65 + x, 100 + y)
       ..close();
-    canvas.drawPath(path, paint);
+    canvas.drawPath(dropPath, paint);
 
-    Path path2 = Path()
+    Path dropPath2 = Path()
       ..moveTo(-5 + x, 80 + y)
       ..lineTo(1 + x, 82 + y)
       ..lineTo(-9 + x, 102 + y)
       ..lineTo(-15 + x, 100 + y)
       ..close();
-    canvas.drawPath(path2, paint);
+    canvas.drawPath(dropPath2, paint);
 
-    Path path3 = Path()
+    Path dropPath3 = Path()
       ..moveTo(45 + x, 80 + y)
       ..lineTo(51 + x, 82 + y)
       ..lineTo(41 + x, 102 + y)
       ..lineTo(35 + x, 100 + y)
       ..close();
-    canvas.drawPath(path3, paint);
+    canvas.drawPath(dropPath3, paint);
 
     //текст
     final textSpan = TextSpan(
       text: 'Облачно,\n12 градусов',
-      style: TextStyle(color: Colors.black.withOpacity(animation.value),fontSize: 30),
+      style: TextStyle(
+          color: Colors.black.withOpacity(animation.value), fontSize: 30),
     );
-    TextPainter tp = new TextPainter(text: textSpan, textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+    TextPainter tp = new TextPainter(
+        text: textSpan,
+        textAlign: TextAlign.left,
+        textDirection: TextDirection.ltr);
     tp.layout();
-    tp.paint(canvas, new Offset(-65.0+x, 65.0+y));
+    tp.paint(canvas, new Offset(-65.0 + x, 65.0 + y));
   }
-
-
-  
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;

@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:custom_widgets_14/widgets/inner_shadow_widget.dart';
+import 'package:custom_widgets_14/widgets/text_widget.dart';
 import 'package:custom_widgets_14/widgets/weather_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     duration: const Duration(seconds: 2),
     vsync: this,
   );
-  late final animation = Tween(begin: 0.5, end: 1.2).animate(controller);
+  late final animation = Tween(begin: 1.0, end: 1.2).animate(controller);
   late final animation1 = Tween(begin: 0.5, end: 100.0).animate(controller);
   late final animation2 = Tween(begin: 0.0, end: 1.0).animate(controller);
 
@@ -76,13 +78,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       widget.sliderValue = v;
                     });
                   }),
-              Text(
+              InnerShadow(
+                  blur: 10,
+                  color: const Color(0xFFFFE555),
+                  offset: const Offset(5, 5),
+                  child: Text(
                 'Испортить погоду',
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(
+                style: TextStyle(fontSize: 44,fontWeight:FontWeight.bold ),
+              )),
+            SizedBox(
                 height: 20,
-              )
+                width: 100,
+              ),
             ],
           )
         ],
