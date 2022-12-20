@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
-   double sliderValue = 0;
+  double sliderValue = 0;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -21,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late final animation = Tween(begin: 1.0, end: 1.2).animate(controller);
   late final animation1 = Tween(begin: 0.5, end: 100.0).animate(controller);
   late final animation2 = Tween(begin: 0.0, end: 1.0).animate(controller);
+   Color selectedColor=Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +30,39 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         title: const Text('Custom Widgets'),
         actions: [
           PopupMenuButton<MenuColor>(
-            icon: Icon(Icons.square,color: menuColorList[0].color,),
-              itemBuilder: (context)=>//<PopupMenuEntry<MenuColor>>[
-            menuColorList.map((e) => PopupMenuItem<MenuColor>(child: Text('aa')));
-            //PopupMenuItem<MenuColor>(child: ListTile())
-    //]
+              icon: Icon(
+                Icons.square,
+                color: selectedColor,
+              ),
+            onSelected: (item){
+              setState(() {
+                if(selectedColor!=item.color){
+                  selectedColor=item.color;
+                  print(selectedColor.toString());
+                }
+              });
+            },
+              itemBuilder: (context) => //<PopupMenuEntry<MenuColor>>[
+                  menuColorList
+                      .map(
+                        (colorItem) => PopupMenuItem<MenuColor>(
+                          value: colorItem,
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.square,
+                              color: colorItem.color,
+                            ),
+                            title: Text(colorItem.nameColor),
+                          ),
+                        ),
+                      )
+                      .toList(),
 
-          )
+
+              //PopupMenuItem<MenuColor>(child: ListTile())
+              //]
+
+              )
         ],
       ),
       body: Column(
@@ -87,17 +114,20 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     });
                   }),
               AppTheme(
-                  appColor: Colors.lightBlueAccent,
-                  child: Builder(builder: (innerContext){
-                    return InnerShadow(
-                        blur: 10,
-                        color: AppTheme.of(innerContext),
-                        offset: Offset(5, 5),
-                        child: Text(
-                          'Испортить погоду',
-                          style: TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
-                        ));
-                  },)) ,
+                  appColor: selectedColor,
+                  child: Builder(
+                    builder: (innerContext) {
+                      return InnerShadow(
+                          blur: 10,
+                          color: AppTheme.of(innerContext),
+                          offset: Offset(5, 5),
+                          child: Text(
+                            'Испортить погоду',
+                            style: TextStyle(
+                                fontSize: 44, fontWeight: FontWeight.bold),
+                          ));
+                    },
+                  )),
               const SizedBox(
                 height: 20,
                 width: 100,
