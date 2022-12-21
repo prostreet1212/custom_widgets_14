@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     vsync: this,
   );
   late final animation = Tween(begin: 1.0, end: 1.2).animate(controller);
-  late final animation1 = Tween(begin: 0.5, end: 100.0).animate(controller);
+  late final animation1 = Tween(begin: 0.0, end: 100.0).animate(controller);
   late final animation2 = Tween(begin: 0.0, end: 1.0).animate(controller);
   Color selectedColor = menuColorList[0].color;
   double sliderValue = 0;
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ],
             ),
             body: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AnimatedBuilder(
                   animation: Listenable.merge([animation, animation1]),
@@ -87,23 +87,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             }
                           });
                         },
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: SizedBox(
-                            height: 130,// + animation1.value,
-                            width: 170,
-                            child: CustomPaint(
-                              painter: WeatherWidget(
-                                  opacity: sliderValue,
-                                  animation: animation2),
-                            ),
-                          ),
-                        ),
                       ),
                     );
                   },
                 ),
-
+                SizedBox(
+                  height: 130,// + animation1.value,
+                  width: 170,
+                  child: CustomPaint(
+                    painter: WeatherWidget(
+                        opacity: sliderValue,
+                        animation: animation2),
+                  ),
+                ),
                 //--------
                 Column(
                   children: [
