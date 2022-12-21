@@ -17,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     duration: const Duration(seconds: 2),
     vsync: this,
   );
-  late final animation = Tween(begin: 1.0, end: 1.2).animate(controller);
+  late final animation = Tween(begin: 0.5, end: 1.2).animate(controller);
   late final animation1 = Tween(begin: 0.0, end: 100.0).animate(controller);
   late final animation2 = Tween(begin: 0.0, end: 1.0).animate(controller);
   Color selectedColor = menuColorList[0].color;
@@ -87,8 +87,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           });
                         },
                         child: SizedBox(
-                          height: 200,
-                          width: 200,
+                          height: 130,
+                          width: 170,
                           child: CustomPaint(
                             painter: WeatherWidget(
                                 opacity: sliderValue, animation: animation2),
