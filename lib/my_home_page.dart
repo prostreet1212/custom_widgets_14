@@ -6,9 +6,9 @@ import 'package:custom_widgets_14/widgets/weather_widget.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
-  double sliderValue = 0;
-//1
+  const MyHomePage({Key? key}) : super(key: key);
+
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -22,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late final animation1 = Tween(begin: 0.5, end: 100.0).animate(controller);
   late final animation2 = Tween(begin: 0.0, end: 1.0).animate(controller);
   Color selectedColor = menuColorList[0].color;
+  double sliderValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -86,13 +87,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             }
                           });
                         },
-                        child: SizedBox(
-                          height: 150 + animation1.value,
-                          width: 150,
-                          child: CustomPaint(
-                            painter: WeatherWidget(
-                                opacity: widget.sliderValue,
-                                animation: animation2),
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: SizedBox(
+                            height: 130,// + animation1.value,
+                            width: 170,
+                            child: CustomPaint(
+                              painter: WeatherWidget(
+                                  opacity: sliderValue,
+                                  animation: animation2),
+                            ),
                           ),
                         ),
                       ),
@@ -107,11 +111,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         min: 0,
                         max: 1,
                         divisions: 10,
-                        label: '${widget.sliderValue}',
-                        value: widget.sliderValue,
+                        label: '$sliderValue',
+                        value: sliderValue,
                         onChanged: (v) {
                           setState(() {
-                            widget.sliderValue = v;
+                            sliderValue = v;
                           });
                         }),
                     InnerShadow(

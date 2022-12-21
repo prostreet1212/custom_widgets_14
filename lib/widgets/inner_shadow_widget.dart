@@ -25,13 +25,14 @@ class InnerShadow extends SingleChildRenderObjectWidget {
 
   @override
   void updateRenderObject(
-      BuildContext context, _RenderInnerShadow renderObject) {
-    renderObject
+      BuildContext context, RenderObject renderObject) {
+    (renderObject as _RenderInnerShadow)
       ..color = color
       ..blur = blur
       ..dx = offset.dx
       ..dy = offset.dy;
   }
+
 }
 
 class _RenderInnerShadow extends RenderProxyBox {
