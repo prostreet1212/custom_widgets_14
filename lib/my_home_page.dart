@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -67,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ],
             ),
             body: Column(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AnimatedBuilder(
                   animation: Listenable.merge([animation, animation1]),
@@ -87,19 +86,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             }
                           });
                         },
+                        child: SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: CustomPaint(
+                            painter: WeatherWidget(
+                                opacity: sliderValue, animation: animation2),
+                          ),
+                        ),
                       ),
                     );
                   },
                 ),
-                SizedBox(
-                  height: 130,// + animation1.value,
-                  width: 170,
-                  child: CustomPaint(
-                    painter: WeatherWidget(
-                        opacity: sliderValue,
-                        animation: animation2),
-                  ),
-                ),
+
                 //--------
                 Column(
                   children: [

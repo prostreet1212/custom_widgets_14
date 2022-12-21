@@ -13,8 +13,8 @@ class WeatherWidget extends CustomPainter {
     Paint paint2 = Paint()
       ..color = Colors.grey.withOpacity(getCloudOpacity(opacity));
     var paint3 = Paint()
-      ..color =
-          const Color.fromARGB(255, 250, 220, 92).withOpacity(getSunOpacity(opacity));
+      ..color = const Color.fromARGB(255, 250, 220, 92)
+          .withOpacity(getSunOpacity(opacity));
 
     double x = size.width / 2;
     double y = size.height / 2;

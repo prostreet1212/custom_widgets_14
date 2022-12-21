@@ -24,15 +24,13 @@ class InnerShadow extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderObject renderObject) {
+  void updateRenderObject(BuildContext context, RenderObject renderObject) {
     (renderObject as _RenderInnerShadow)
       ..color = color
       ..blur = blur
       ..dx = offset.dx
       ..dy = offset.dy;
   }
-
 }
 
 class _RenderInnerShadow extends RenderProxyBox {
@@ -64,6 +62,9 @@ class _RenderInnerShadow extends RenderProxyBox {
       ..saveLayer(rectInner, Paint())
       ..translate(dx, dy);
     context.paintChild(child!, offset);
-    context.canvas..restore()..restore()..restore();
+    context.canvas
+      ..restore()
+      ..restore()
+      ..restore();
   }
 }
