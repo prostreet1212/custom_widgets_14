@@ -16,47 +16,51 @@ class WeatherWidget extends CustomPainter {
       ..color = const Color.fromARGB(255, 250, 220, 92)
           .withOpacity(getSunOpacity(opacity));
 
-    double x = size.width / 2;
-    double y = size.height / 2;
+    final strokeWidth = size.width / 15.0;
+    final circleCenter = Offset(size.width / 2, size.height / 2);
+    final circleRadius = (size.width - strokeWidth) / 2.4;
+
+    double x = circleCenter.dx;
+    double y = circleCenter.dy;
 
     //Солнце
-    canvas.drawCircle(Offset(0.0 + x, 0 + y), 60, paint3);
+    canvas.drawCircle(circleCenter, circleRadius, paint3);
     //Облачко
     RRect rect = RRect.fromRectAndRadius(
-        Rect.fromPoints(Offset(-55 + x, 40.0 + y), Offset(55 + x, 70 + y)),
+        Rect.fromPoints(Offset(-31 + x, 40.0 + y), Offset(33 + x, 49.1 + y)),
         const Radius.circular(0));
     Path cloudPath = Path();
     cloudPath.addRRect(rect);
-    cloudPath.addOval(
-        Rect.fromCircle(center: Offset(-55 + x, 40.0 + y), radius: 30));
-    cloudPath
-        .addOval(Rect.fromCircle(center: Offset(0 + x, 30.0 + y), radius: 40));
-    cloudPath
-        .addOval(Rect.fromCircle(center: Offset(50 + x, 37 + y), radius: 33));
+    cloudPath.addOval(Rect.fromCircle(
+        center: Offset(-30 + x, 31.5 + y), radius: circleRadius / 2));
+    cloudPath.addOval(Rect.fromCircle(
+        center: Offset(0 + x, 23 + y), radius: circleRadius * 2 / 3));
+    cloudPath.addOval(Rect.fromCircle(
+        center: Offset(30 + x, 30 + y), radius: circleRadius * 0.55));
     canvas.drawPath(cloudPath, paint2);
 
     //Капли
     Path dropPath = Path()
-      ..moveTo(-55 + x, 80 + y)
-      ..lineTo(-49 + x, 82 + y)
-      ..lineTo(-59 + x, 102 + y)
-      ..lineTo(-65 + x, 100 + y)
+      ..moveTo(-33 + x, 58 + y)
+      ..lineTo(-27 + x, 60 + y)
+      ..lineTo(-32 + x, 70 + y)
+      ..lineTo(-38 + x, 68 + y)
       ..close();
     canvas.drawPath(dropPath, paint);
 
     Path dropPath2 = Path()
-      ..moveTo(-5 + x, 80 + y)
-      ..lineTo(1 + x, 82 + y)
-      ..lineTo(-9 + x, 102 + y)
-      ..lineTo(-15 + x, 100 + y)
+      ..moveTo(-3 + x, 58 + y)
+      ..lineTo(3 + x, 60 + y)
+      ..lineTo(-2 + x, 70 + y)
+      ..lineTo(-8 + x, 68 + y)
       ..close();
     canvas.drawPath(dropPath2, paint);
 
     Path dropPath3 = Path()
-      ..moveTo(45 + x, 80 + y)
-      ..lineTo(51 + x, 82 + y)
-      ..lineTo(41 + x, 102 + y)
-      ..lineTo(35 + x, 100 + y)
+      ..moveTo(27 + x, 58 + y)
+      ..lineTo(33 + x, 60 + y)
+      ..lineTo(28 + x, 70 + y)
+      ..lineTo(22 + x, 68 + y)
       ..close();
     canvas.drawPath(dropPath3, paint);
 
@@ -64,14 +68,14 @@ class WeatherWidget extends CustomPainter {
     final textSpan = TextSpan(
       text: 'Облачно,\n12 градусов',
       style: TextStyle(
-          color: Colors.black.withOpacity(animation.value), fontSize: 30),
+          color: Colors.black.withOpacity(animation.value), fontSize: 16),
     );
     TextPainter tp = TextPainter(
         text: textSpan,
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr);
     tp.layout();
-    tp.paint(canvas, Offset(-65.0 + x, 65.0 + y));
+    tp.paint(canvas, Offset(-45.0 + x, 65.0 + y));
   }
 
   @override
