@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class WeatherWidget extends CustomPainter {
   double opacity;
-  Animation animation;
 
-  WeatherWidget({required this.opacity, required this.animation});
+  WeatherWidget({
+    required this.opacity,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -27,7 +28,7 @@ class WeatherWidget extends CustomPainter {
     canvas.drawCircle(circleCenter, circleRadius, paint3);
     //Облачко
     RRect rect = RRect.fromRectAndRadius(
-        Rect.fromPoints(Offset(-31 + x, 40.0 + y), Offset(33 + x, 49.1 + y)),
+        Rect.fromPoints(Offset(-31 + x, 40.0 + y), Offset(33 + x, 50.9 + y)),
         const Radius.circular(0));
     Path cloudPath = Path();
     cloudPath.addRRect(rect);
@@ -67,8 +68,7 @@ class WeatherWidget extends CustomPainter {
     //текст
     final textSpan = TextSpan(
       text: 'Облачно,\n12 градусов',
-      style: TextStyle(
-          color: Colors.black.withOpacity(animation.value), fontSize: 16),
+      style: TextStyle(color: Colors.black.withOpacity(opacity), fontSize: 16),
     );
     TextPainter tp = TextPainter(
         text: textSpan,

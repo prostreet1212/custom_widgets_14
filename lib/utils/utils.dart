@@ -8,3 +8,17 @@ List<MenuColor> menuColorList = [
   MenuColor(color: Colors.purple, nameColor: 'Пурпурный'),
   MenuColor(color: Colors.lightBlueAccent, nameColor: 'Голубой'),
 ];
+
+class CloudClip extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return const Rect.fromLTWH(-20, 0, 130, 215);
+  }
+
+  @override
+  bool shouldReclip(oldClipper) {
+    return false;
+  }
+
+}
+

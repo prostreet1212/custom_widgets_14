@@ -14,12 +14,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late final AnimationController controller = AnimationController(
-    duration: const Duration(milliseconds: 500),
+    duration: const Duration(milliseconds: 1000),
     vsync: this,
   );
   late final animation = Tween(begin: 1.0, end: 1.5).animate(controller);
   late final animation1 = Tween(begin: 0.0, end: 100.0).animate(controller);
-  late final animation2 = Tween(begin: 0.0, end: 1.0).animate(controller);
   Color selectedColor = menuColorList[0].color;
   double sliderValue = 0;
 
@@ -87,10 +86,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             }
                           });
                         },
-                        child: CustomPaint(
-                          size: const Size(90.0, 90.0),
-                          painter: WeatherWidget(
-                              opacity: sliderValue, animation: animation2),
+                        child: ClipRect(
+                          clipper: CloudClip(),
+                          child: CustomPaint(
+                            size: const Size(100.0, 105.0),
+                            painter: WeatherWidget(
+                                opacity: sliderValue),
+                          ),
                         ),
                       ),
                     );
@@ -135,3 +137,4 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 }
+
