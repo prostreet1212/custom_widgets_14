@@ -90,8 +90,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           clipper: CloudClip(),
                           child: CustomPaint(
                             size: const Size(100.0, 105.0),
-                            painter: WeatherWidget(
-                                opacity: sliderValue),
+                            painter: WeatherWidget(opacity: sliderValue),
                           ),
                         ),
                       ),
@@ -137,4 +136,3 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 }
-
