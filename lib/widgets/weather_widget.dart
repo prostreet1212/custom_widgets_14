@@ -64,18 +64,6 @@ class WeatherWidget extends CustomPainter {
       ..lineTo(22 + x, 68 + y)
       ..close();
     canvas.drawPath(dropPath3, paint);
-
-    //текст
-    /*final textSpan = TextSpan(
-      text: 'Облачно,\n12 градусов',
-      style: TextStyle(color: Colors.black.withOpacity(opacity), fontSize: 16),
-    );
-    TextPainter tp = TextPainter(
-        text: textSpan,
-        textAlign: TextAlign.left,
-        textDirection: TextDirection.ltr);
-    tp.layout();
-    tp.paint(canvas, Offset(-45.0 + x, 65.0 + y));*/
   }
 
   @override
