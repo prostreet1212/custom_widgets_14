@@ -6,5 +6,3 @@ class MenuColor {
 
   MenuColor({required this.color, required this.nameColor});
 }
-
-

@@ -19,6 +19,4 @@ class CloudClip extends CustomClipper<Rect> {
   bool shouldReclip(oldClipper) {
     return false;
   }
-
 }
-

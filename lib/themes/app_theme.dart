@@ -8,11 +8,10 @@ class AppTheme extends InheritedWidget {
 
   static Color of(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<AppTheme>();
-    assert(result!=null,'Error theme');
+    assert(result != null, 'Error theme');
     return result!.appColor;
   }
 
   @override
-  bool updateShouldNotify(AppTheme oldWidget) =>
-      appColor != oldWidget.appColor;
+  bool updateShouldNotify(AppTheme oldWidget) => appColor != oldWidget.appColor;
 }

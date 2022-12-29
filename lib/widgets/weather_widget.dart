@@ -18,7 +18,7 @@ class WeatherWidget extends CustomPainter {
           .withOpacity(getSunOpacity(opacity));
 
     final strokeWidth = size.width / 15.0;
-    final circleCenter = Offset(size.width / 2, size.height / 2);
+    final circleCenter = Offset(size.width / 2, size.height / 2 - 10);
     final circleRadius = (size.width - strokeWidth) / 2.4;
 
     double x = circleCenter.dx;
@@ -28,7 +28,7 @@ class WeatherWidget extends CustomPainter {
     canvas.drawCircle(circleCenter, circleRadius, paint3);
     //Облачко
     RRect rect = RRect.fromRectAndRadius(
-        Rect.fromPoints(Offset(-31 + x, 40.0 + y), Offset(33 + x, 50.9 + y)),
+        Rect.fromPoints(Offset(-31 + x, 40.0 + y), Offset(33 + x, 51.9 + y)),
         const Radius.circular(0));
     Path cloudPath = Path();
     cloudPath.addRRect(rect);
@@ -66,7 +66,7 @@ class WeatherWidget extends CustomPainter {
     canvas.drawPath(dropPath3, paint);
 
     //текст
-    final textSpan = TextSpan(
+    /*final textSpan = TextSpan(
       text: 'Облачно,\n12 градусов',
       style: TextStyle(color: Colors.black.withOpacity(opacity), fontSize: 16),
     );
@@ -75,7 +75,7 @@ class WeatherWidget extends CustomPainter {
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr);
     tp.layout();
-    tp.paint(canvas, Offset(-45.0 + x, 65.0 + y));
+    tp.paint(canvas, Offset(-45.0 + x, 65.0 + y));*/
   }
 
   @override
